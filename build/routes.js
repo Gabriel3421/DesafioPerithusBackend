@@ -7,6 +7,6 @@ const routes = new Router();
 routes.use(logsMiddleware);
 
 routes.get('/covid/:state', CovidController.show );
-routes.get('/covid', CovidController.index );
+routes.get('/covid/all', CovidController.index );
 
 module.exports = routes;

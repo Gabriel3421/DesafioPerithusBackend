@@ -10,7 +10,9 @@ export default async (req, res, next) => {
     'Body:',
     req.body,
     'Params:',
-    req.params
+    req.params,
+    'Route:',
+    req.url
   );
   return next();
 };
