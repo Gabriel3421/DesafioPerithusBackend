@@ -10,7 +10,7 @@ class CovidController {
         deaths: state.deaths,
       }
     })
-    return res.json(brazilCovid)
+    return res.status(200).json(brazilCovid)
   }
   async show(req, res) {
     const states = [
@@ -44,15 +44,15 @@ class CovidController {
     ]
 
     if(!req.params.state){
-      return res.json({ error: "Params State Not provided" })
+      return res.status(400).json({ error: "Params State Not provided" })
     }
     if(!states.includes(req.params.state.toUpperCase())){
-      return res.json({ error: "State is not valid" })
+      return res.status(400).json({ error: "State is not valid" })
     }
     const response = await api.get(`https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/${req.params.state}`);
     const { state, cases, deaths } = response.data
     
-    return res.json({ state, cases, deaths })
+    return res.status(200).json({ state, cases, deaths })
   }
 }
 module.exports = new CovidController();
