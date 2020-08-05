@@ -42,12 +42,12 @@ class CovidController {
       "SE",
       "TO",
     ]
-
+    // Unico motivo do state vazio nos erros é pra aplicação mostrar que tem algo errado
     if(!req.params.state){
-      return res.status(400).json({ error: "Params State Not provided" })
+      return res.status(400).json({ error: "Params State Not provided", state:"" })
     }
     if(!states.includes(req.params.state.toUpperCase())){
-      return res.status(400).json({ error: "State is not valid" })
+      return res.status(400).json({ error: "State is not valid", state:"" })
     }
     const response = await api.get(`https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/${req.params.state}`);
     const { state, cases, deaths } = response.data
